@@ -287,12 +287,6 @@ function M.setup(user_config)
 		end
 	})
 
-	require("nvim-treesitter.configs").setup({
-		nvimGPS = {
-			enable = true
-		}
-	})
-
 	setup_complete = true
 end
 
