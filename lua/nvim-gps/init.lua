@@ -10,11 +10,11 @@ local default_config = {
 	enabled = true,
 	disable_icons = false,
 	icons = {
-		["class-name"] = ' ',
-		["function-name"] = ' ',
-		["method-name"] = ' ',
-		["container-name"] = 'ﮅ ',
-		["tag-name"] = '炙',
+		["class-name"] = ' ',
+		["function-name"] = '󰊕 ',
+		["method-name"] = ' ',
+		["container-name"] = ' ',
+		["tag-name"] = '',
 	},
 	separator = ' > ',
 	depth = 0,
@@ -45,16 +45,16 @@ local function setup_language_configs()
 	configs = {
 		["javascript"] = with_default_config({
 			icons = {
-				["array-name"] = ' ',
-				["object-name"] = ' ',
+				["array-name"] = ' ',
+				["object-name"] = '󰖡 ',
 			}
 		}),
 		["json"] = with_default_config({
 			icons = {
-				["array-name"] = ' ',
-				["object-name"] = ' ',
+				["array-name"] = ' ',
+				["object-name"] = '󰖡 ',
 				["null-name"] = '[] ',
-				["boolean-name"] = 'ﰰﰴ ',
+				["boolean-name"] = ' ',
 				["number-name"] = '# ',
 				["string-name"] = ' '
 			}
@@ -67,19 +67,19 @@ local function setup_language_configs()
 		}),
 		["norg"] = with_default_config({
 			icons = {
-				["title-name"] = " ",
+				["title-name"] = "# ",
 			},
 		}),
 		["toml"] = with_default_config({
 			icons = {
-				["table-name"] = ' ',
-				["array-name"] = ' ',
-				["boolean-name"] = 'ﰰﰴ ',
-				["date-name"] = ' ',
-				["date-time-name"] = ' ',
-				["float-name"] = ' ',
-				["inline-table-name"] = ' ',
-				["integer-name"] = '# ',
+				["table-name"] = ' ',
+				["array-name"] = ' ',
+				["boolean-name"] = ' ',
+				["date-name"] = '󰃭 ',
+				["date-time-name"] = '󰃰 ',
+				["float-name"] = '󱂡 ',
+				["inline-table-name"] = ' ',
+				["integer-name"] = ' ',
 				["string-name"] = ' ',
 				["time-name"] = ' '
 			}
@@ -91,26 +91,26 @@ local function setup_language_configs()
 		}),
 		["yaml"] = with_default_config({
 			icons = {
-				["mapping-name"] = ' ',
-				["sequence-name"] = ' ',
+				["mapping-name"] = '󰍍 ',
+				["sequence-name"] = '󱪶 ',
 				["null-name"] = '[] ',
-				["boolean-name"] = 'ﰰﰴ ',
-				["integer-name"] = '# ',
-				["float-name"] = ' ',
+				["boolean-name"] = ' ',
+				["integer-name"] = ' ',
+				["float-name"] = '󱂡 ',
 				["string-name"] = ' '
 			}
 		}),
 		["yang"] = with_default_config({
 			icons = {
-				["module-name"] = " ",
-				["augment-path"] = " ",
-				["container-name"] = " ",
-				["grouping-name"] = " ",
-				["typedef-name"] = " ",
-				["identity-name"] = " ",
-				["list-name"] = "﬘ ",
-				["leaf-list-name"] = " ",
-				["leaf-name"] = " ",
+				["module-name"] = ' ',
+				["augment-path"] = " ",
+				["container-name"] = ' ',
+				["grouping-name"] = " ",
+				["typedef-name"] = " ",
+				["identity-name"] = " ",
+				["list-name"] = ' ',
+				["leaf-list-name"] = "󰌪 ",
+				["leaf-name"] = "󱤅 ",
 				["action-name"] = " ",
 			}
 		}),
