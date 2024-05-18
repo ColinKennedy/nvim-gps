@@ -386,7 +386,7 @@ function M.get_data()
 
 	local data = {}
 	for _, v in pairs(node_data) do
-		if not vim.tbl_islist(v) then
+		if not vim.islist(v) then
 			table.insert(data, v)
 		else
 			vim.list_extend(data, v)
