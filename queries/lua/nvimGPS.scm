@@ -4,6 +4,9 @@
 	name: (identifier) @function-name) @scope-root)
 
 ((function_declaration
+	name: (method_index_expression) @function-name) @scope-root)
+
+((function_declaration
 	name: (dot_index_expression) @table-function) @scope-root)
 
 ; Function assined to variables
