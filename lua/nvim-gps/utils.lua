@@ -1,12 +1,10 @@
-local ts_utils = require("nvim-treesitter.ts_utils")
-
 local M = {}
 
 function M.get_node_text(node)
 	local bufnr = vim.api.nvim_get_current_buf()
 
 	-- We have to remember that end_col is end-exclusive
-	local start_row, start_col, end_row, end_col = ts_utils.get_node_range(node)
+	local start_row, start_col, end_row, end_col = node:range()
 
 	if start_row ~= end_row then
 		local lines = vim.api.nvim_buf_get_lines(bufnr, start_row, end_row + 1, false)

@@ -1,5 +1,3 @@
-local ts_queries = require("nvim-treesitter.query")
-
 local M = {}
 
 -- TreeSitter module setup
@@ -8,7 +6,7 @@ function M.init()
 		nvimGPS = {
 			module_path = "nvim-gps.internal",
 			is_supported = function(lang)
-				return ts_queries.get_query(lang, "nvimGPS") ~= nil
+				return vim.treesitter.query.get(lang, "nvimGPS") ~= nil
 			end
 		}
 	}

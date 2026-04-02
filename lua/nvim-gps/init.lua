@@ -1,6 +1,3 @@
-local ts_utils = require("nvim-treesitter.ts_utils")
-local ts_parsers = require("nvim-treesitter.parsers")
-local ts_queries = require("nvim-treesitter.query")
 local utils = require("nvim-gps.utils")
 
 local M = {}
@@ -243,12 +240,12 @@ setmetatable(transform_lang, {
 -- The availability is cached in a buffer variable (b:nvim_gps_available)
 function M.is_available()
 	if setup_complete and vim.b.nvim_gps_available == nil then
-		local filelang = ts_parsers.ft_to_lang(vim.bo.filetype)
+		local filelang = vim.treesitter.language.get_lang(vim.bo.filetype)
 		local config = configs[filelang]
 
 		if config.enabled then
-			local has_parser = ts_parsers.has_parser(filelang)
-			local has_query = ts_queries.has_query_files(filelang, "nvimGPS")
+			local has_parser = pcall(vim.treesitter.get_parser, 0, filelang)
+			local has_query = vim.treesitter.query.get(filelang, "nvimGPS") ~= nil
 
 			vim.b.nvim_gps_available = has_parser and has_query
 		else
@@ -290,13 +287,11 @@ function M.setup(user_config)
 	setup_complete = true
 end
 
--- Request treesitter parser to update the syntax tree,
--- when the buffer content has changed.
-local update_tree = ts_utils.memoize_by_buf_tick(function(bufnr)
-	local filelang = ts_parsers.ft_to_lang(vim.api.nvim_buf_get_option(bufnr, "filetype"))
-	local parser = ts_parsers.get_parser(bufnr, filelang)
+-- Request treesitter parser to update the syntax tree.
+local function update_tree(buffer)
+	local parser = vim.treesitter.get_parser(buffer)
 	return parser:parse()
-end)
+end
 
 ---@return table|nil  the data in table format, or nil if gps is not available
 function M.get_data()
@@ -313,8 +308,8 @@ function M.get_data()
 
 	data_prev_loc = vim.api.nvim_win_get_cursor(0)
 
-	local filelang = ts_parsers.ft_to_lang(vim.bo.filetype)
-	local gps_query = ts_queries.get_query(filelang, "nvimGPS")
+	local filelang = vim.treesitter.language.get_lang(vim.bo.filetype)
+	local gps_query = vim.treesitter.query.get(filelang, "nvimGPS")
 	local transform = transform_lang[filelang]
 	local config = configs[filelang]
 
@@ -325,7 +320,7 @@ function M.get_data()
 	-- Request treesitter parser to update the syntax tree for the current buffer.
 	update_tree(vim.api.nvim_get_current_buf())
 
-	local current_node = ts_utils.get_node_at_cursor()
+	local current_node = vim.treesitter.get_node()
 
 	local node_data = {}
 	local node = current_node
@@ -410,7 +405,7 @@ function M.get_location(opts)
 
 	location_prev_loc = vim.api.nvim_win_get_cursor(0)
 
-	local filelang = ts_parsers.ft_to_lang(vim.bo.filetype)
+	local filelang = vim.treesitter.language.get_lang(vim.bo.filetype)
 	local config = configs[filelang]
 	local data = M.get_data()
 
