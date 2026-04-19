@@ -22,7 +22,7 @@
 ; Function Expression
 ((variable_declarator
 	name: (identifier) @function-name
-	value: (function)) @scope-root)
+	value: (function_expression)) @scope-root)
 
 ; Tests
 ((expression_statement
