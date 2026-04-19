@@ -245,9 +245,9 @@ function M.is_available()
 
 		if config.enabled then
 			local has_parser = pcall(vim.treesitter.get_parser, 0, filelang)
-			local has_query = vim.treesitter.query.get(filelang, "nvimGPS") ~= nil
+			local success, query = pcall(vim.treesitter.query.get, filelang, "nvimGPS")
 
-			vim.b.nvim_gps_available = has_parser and has_query
+			vim.b.nvim_gps_available = has_parser and success and (query ~= nil)
 		else
 			vim.b.nvim_gps_available = false
 		end
